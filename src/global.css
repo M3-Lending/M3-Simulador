@@ -16,3 +16,10 @@
   width: var(--radix-select-trigger-width);
   max-height: var(--radix-select-content-available-height);
 }
+
+.montserrat-font {
+  font-family: "Montserrat", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
