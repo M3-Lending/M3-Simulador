@@ -21,7 +21,7 @@ export const Select = ({ options, variant = "default", ...props }: Props) => {
       <S.Trigger
         aria-label="Tipo de investimento"
         className={cn(
-          "text-m3-gray-100 justify-between cursor-pointer group flex items-center px-[14px] py-4 w-[386px] text-start shadow-md focus:outline-none hover:outline-none  rounded-[8px]  transition-all duration-300",
+          "data-[placeholder]:text-m3-gray-100 justify-between cursor-pointer group flex items-center px-[14px] py-4 w-[386px] text-start shadow-md focus:outline-none hover:outline-none  rounded-[8px]  transition-all duration-300",
           variants[variant]
         )}
       >

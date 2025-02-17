@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import { Button } from "../../../shared/components/_core/button";
 import { RenderList } from "../../../shared/components/render-utils/render-list";
 import { WithHeaderLayout } from "../../../shared/layouts/with-header-layout";
@@ -50,7 +51,11 @@ export const SimulationResultView = () => {
             />
           </div>
 
-          <Button variant="outline">Realizar outra simulação</Button>
+          <Button variant="outline" asChild>
+            <Link to="/" className="text-center">
+              Realizar outra simulação
+            </Link>
+          </Button>
         </section>
         {/* ----- */}
         <div className="bg-m3-gray-200 h-full w-px" />

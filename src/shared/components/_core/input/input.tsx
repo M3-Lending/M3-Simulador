@@ -18,7 +18,7 @@ export const Input = ({ label, variant = "default", ...props }: Props) => {
       <input
         {...props}
         className={cn(
-          "text-m3-gray-100 px-[14px] py-4 w-[386px] shadow-md focus:outline-none hover:outline-none  rounded-[8px]  transition-all duration-300",
+          "placeholder:text-m3-gray-100 px-[14px] py-4 w-[386px] shadow-md focus:outline-none hover:outline-none rounded-[8px] transition-all duration-300",
           variants[variant],
           props.className
         )}

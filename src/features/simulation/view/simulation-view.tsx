@@ -1,7 +1,9 @@
-import { Button } from "../../shared/components/_core/button";
-import { Input } from "../../shared/components/_core/input";
-import { Select } from "../../shared/components/_core/select";
-import { WithHeaderLayout } from "../../shared/layouts/with-header-layout";
+import { Link } from "react-router";
+import { Button } from "../../../shared/components/_core/button";
+import { Input } from "../../../shared/components/_core/input";
+import { Select } from "../../../shared/components/_core/select";
+import { WithHeaderLayout } from "../../../shared/layouts/with-header-layout";
+import { PATHS } from "../../../routers";
 
 const investiment_options = [
   {
@@ -33,7 +35,11 @@ export const SimulationView = () => {
           </div>
         </div>
 
-        <Button>Simular Agora</Button>
+        <Button asChild>
+          <Link to={PATHS.RESULT} className="text-center">
+            Simular Agora
+          </Link>
+        </Button>
       </form>
     </WithHeaderLayout>
   );
