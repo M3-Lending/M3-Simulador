@@ -2,6 +2,7 @@ import { Button } from "../../shared/components/_core/button";
 import { RenderList } from "../../shared/components/render-utils/render-list";
 import { WithHeaderLayout } from "../../shared/layouts/with-header-layout";
 import { ResultBlock } from "./component/result-block";
+import { TableResult } from "./component/table-result";
 
 export const SimulationResultView = () => {
   const simulationResult = [
@@ -35,7 +36,7 @@ export const SimulationResultView = () => {
         de {informations.interestRate}%, teve o incrível rendimento abaixo:
       </h1>
       <div className="flex w-full gap-[30px]">
-        <section className="flex flex-col gap-[116px] items-start justify-start w-full relative z-10">
+        <section className="flex flex-col gap-[116px] items-start justify-between w-full relative z-10">
           <div className="grid grid-cols-2 grid-rows-2 gap-[30px]">
             <RenderList
               items={simulationResult}
@@ -54,21 +55,12 @@ export const SimulationResultView = () => {
         {/* ----- */}
         <div className="bg-m3-gray-200 h-full w-px" />
         {/* ----- */}
-        <section className="flex flex-col gap-[116px] items-end justify-end w-full relative z-10">
-          <div className="grid grid-cols-2 grid-rows-2 gap-[30px]">
-            <RenderList
-              items={simulationResult}
-              renderItem={(opt) => (
-                <ResultBlock
-                  label={opt.label}
-                  className="min-w-[290px]"
-                  description={opt.description}
-                />
-              )}
-            />
+        <section className="flex flex-col gap-[116px] items-end justify-between w-full relative z-10">
+          <div className="w-full  h-[350px] overflow-auto">
+            <TableResult />
           </div>
 
-          <Button>Gerar relátorio PDF</Button>
+          <Button className="self-end">Gerar relátorio PDF</Button>
         </section>
       </div>
     </WithHeaderLayout>
