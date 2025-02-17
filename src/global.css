@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@theme {
+  --color-m3-gray-100: #6b7280;
+  --color-m3-gray-200: #4b5563;
+}
+
+.SelectContent {
+  width: var(--radix-select-trigger-width);
+  max-height: var(--radix-select-content-available-height);
+}
