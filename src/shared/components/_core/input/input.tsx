@@ -1,6 +1,6 @@
 import React from "react";
-import { cn } from "../../utils/cn";
-import { variants, VariantsOptions } from "../../utils/form";
+import { variants, VariantsOptions } from "../../../utils/form";
+import { cn } from "../../../utils/cn";
 
 type Props = React.ComponentProps<"input"> & {
   label?: string;

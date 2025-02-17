@@ -1,8 +1,9 @@
 import * as S from "@radix-ui/react-select";
-import { Icons } from "../../icons";
+
 import { RenderList } from "../../render-utils/render-list";
-import { cn } from "../../utils/cn";
-import { variants, VariantsOptions } from "../../utils/form";
+import { Icons } from "../../../icons";
+import { variants, VariantsOptions } from "../../../utils/form";
+import { cn } from "../../../utils/cn";
 
 type Props = {
   options: {
@@ -36,7 +37,7 @@ export const Select = ({ options, variant = "default", ...props }: Props) => {
               renderItem={(opt) => (
                 <S.Item
                   value={opt.value}
-                  className="text-m3-gray-100 px-[14px] py-4 w-[386px] cursor-pointer hover:bg-m3-gray-100/20 hover:text-black focus:outline-none hover:outline-none  rounded-[8px]  transition-all duration-300"
+                  className="text-m3-gray-100 border-m3-gray-100/20 border-t px-[14px] py-4 w-[386px] cursor-pointer hover:bg-m3-gray-100/20 hover:text-black focus:outline-none hover:outline-none  rounded-[8px]  transition-all duration-300"
                 >
                   <S.ItemText>{opt.label}</S.ItemText>
                 </S.Item>

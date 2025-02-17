@@ -1,4 +1,4 @@
-import { Button } from "./shared/components/_core/button";
+import { SimulationView } from "./features/simulation/simulation-view";
 
 // const investiment_options = [
 //   {
@@ -14,17 +14,7 @@ import { Button } from "./shared/components/_core/button";
 function App() {
   return (
     <main className="h-screen w-screen">
-      {/* <Input
-        placeholder="Ex: 1000"
-        label="Quanto pretende investir?"
-        variant="fail"
-      />
-      <div className="flex items-center justify-center w-full h-full">
-        <Select options={investiment_options} />
-      </div>
-      */}
-
-      <Button size="default">Clique aqui man</Button>
+      <SimulationView />
     </main>
   );
 }
