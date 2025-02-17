@@ -1,3 +1,4 @@
+import { SimulationResultView } from "./features/simulation-result/simulation-result";
 import { SimulationView } from "./features/simulation/simulation-view";
 
 // const investiment_options = [
@@ -14,7 +15,8 @@ import { SimulationView } from "./features/simulation/simulation-view";
 function App() {
   return (
     <main className="h-screen w-screen">
-      <SimulationView />
+      {/* <SimulationView /> */}
+      <SimulationResultView />
     </main>
   );
 }
