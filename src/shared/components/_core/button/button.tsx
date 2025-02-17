@@ -1,17 +1,19 @@
 import React from "react";
 import { cn } from "../../../utils/cn";
+import { Slot } from "@radix-ui/react-slot";
 
 type VariantButtonOptions = "primary" | "outline";
 
 type SizesButtonOptions = "default" | "full";
 
 type Props = React.PropsWithChildren & {
-  variant?: VariantButtonOptions;
+  asChild?: boolean;
   size?: SizesButtonOptions;
+  variant?: VariantButtonOptions;
 } & React.ComponentProps<"button">;
 
 export const Button = ({
-  children,
+  asChild,
   size = "default",
   variant = "primary",
   ...props
@@ -26,8 +28,10 @@ export const Button = ({
     full: "w-full",
   };
 
+  const Comp = asChild ? Slot : "button";
+
   return (
-    <button
+    <Comp
       {...props}
       className={cn(
         "w-full py-[14px] px-4 rounded-[8px] cursor-pointer hover:scale-[1.03] duration-300 transition-transform active:scale-110",
@@ -35,8 +39,6 @@ export const Button = ({
         variants[variant],
         props.className
       )}
-    >
-      {children}
-    </button>
+    />
   );
 };

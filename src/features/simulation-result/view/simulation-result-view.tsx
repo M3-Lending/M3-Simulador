@@ -1,8 +1,8 @@
-import { Button } from "../../shared/components/_core/button";
-import { RenderList } from "../../shared/components/render-utils/render-list";
-import { WithHeaderLayout } from "../../shared/layouts/with-header-layout";
-import { ResultBlock } from "./component/result-block";
-import { TableResult } from "./component/table-result";
+import { Button } from "../../../shared/components/_core/button";
+import { RenderList } from "../../../shared/components/render-utils/render-list";
+import { WithHeaderLayout } from "../../../shared/layouts/with-header-layout";
+import { ResultBlock } from "../component/result-block";
+import { TableResult } from "../component/table-result";
 
 export const SimulationResultView = () => {
   const simulationResult = [
