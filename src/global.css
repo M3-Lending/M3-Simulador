@@ -1,8 +1,13 @@
 @import "tailwindcss";
 
 @theme {
+  --color-m3-primary: #1ae59b;
+
+  /* Gray scale   */
   --color-m3-gray-100: #6b7280;
   --color-m3-gray-200: #4b5563;
+
+  /*   */
 }
 
 .SelectContent {
