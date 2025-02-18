@@ -1,7 +1,7 @@
 import * as T from "../../../../shared/components/_core/table";
 import { RenderList } from "../../../../shared/components/render-utils/render-list";
+import { DetailedResult } from "../../../../shared/types";
 import { getFormatterForCurrency } from "../../../../shared/utils/formatters";
-import { DetailedResult } from "../../../../shared/utils/storage";
 
 const tableHeaders = [
   "Prazo",
