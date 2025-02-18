@@ -1,5 +1,6 @@
 import * as T from "../../../../shared/components/_core/table";
 import { RenderList } from "../../../../shared/components/render-utils/render-list";
+import { getFormatterForCurrency } from "../../../../shared/utils/formatters";
 import { DetailedResult } from "../../../../shared/utils/storage";
 
 const tableHeaders = [
@@ -14,6 +15,8 @@ export const TableResult = ({
 }: {
   detailedResult: DetailedResult[];
 }) => {
+  const format = getFormatterForCurrency();
+
   return (
     <T.Table>
       <T.TableHeader className="border-m3-gray-50 border">
@@ -37,13 +40,13 @@ export const TableResult = ({
                 {result.time} mês
               </T.TableCell>
               <T.TableCell className="border-m3-gray-50 border font-bold">
-                R$ {result.netIncome}
+                {format.format(parseFloat(result.netIncome))}
               </T.TableCell>
               <T.TableCell className="border-m3-gray-50 border">
-                R$ {result.grossIncome}
+                {format.format(parseFloat(result.grossIncome))}
               </T.TableCell>
               <T.TableCell className="border-m3-gray-50 border">
-                R$ {result.incomeTax}
+                {format.format(parseFloat(result.incomeTax))}
               </T.TableCell>
             </T.TableRow>
           )}

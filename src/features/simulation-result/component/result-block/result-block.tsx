@@ -16,7 +16,7 @@ export const ResultBlock = ({ label, description, ...props }: Props) => {
       )}
     >
       <label className="text-m3-gray-200 font-medium text-[32px]">
-        <span className="text-4xl">R$</span> {label}
+        {label}
       </label>
       <dd className="text-m3-gray-100 text-[20px]">{description}</dd>
     </div>

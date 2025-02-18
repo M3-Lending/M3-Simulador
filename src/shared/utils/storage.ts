@@ -1,24 +1,9 @@
-export type DetailedResult = {
-  time: string;
-  netIncome: string;
-  grossIncome: string;
-  incomeTax: string;
-};
-
-export type SimulationTotalValues = {
-  totalGrossIncome: number;
-  totalIncomeTax: number;
-  totalNetIncome: number;
-  amountInvested: number;
-};
+import { DetailedResult, Informations, SimulationTotalValues } from "../types";
 
 type TypeStorage = {
-  simulationResult: SimulationTotalValues;
-  informations: {
-    time: string;
-    interestRate: string;
-  };
+  informations: Informations;
   detailedResults: DetailedResult[];
+  simulationResult: SimulationTotalValues;
 };
 
 export const storage = {

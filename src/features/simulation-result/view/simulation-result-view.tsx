@@ -2,46 +2,29 @@ import { Link } from "react-router";
 import { Button } from "../../../shared/components/_core/button";
 import { RenderList } from "../../../shared/components/render-utils/render-list";
 import { WithHeaderLayout } from "../../../shared/layouts/with-header-layout";
+
 import { ResultBlock } from "../component/result-block";
 import { TableResult } from "../component/table-result";
-import { storage } from "../../../shared/utils/storage";
+import { SimulationResultProps } from "../types";
+import { DetailedResult, Informations } from "../../../shared/types";
 
-export const SimulationResultView = () => {
-  const infor = storage.get("informations");
+type SimulationResultViewProps = {
+  informations: Informations | null;
+  resultsByMounth: DetailedResult[] | null;
+  simulationResult: SimulationResultProps[];
+};
 
-  const results = storage.get("simulationResult");
-
-  const resultsByMounth = storage.get("detailedResults");
-
-  const simulationResult = [
-    {
-      label: results?.amountInvested,
-      description: "Valor invesito",
-    },
-    {
-      label: results?.totalGrossIncome,
-      description: "Rendimento bruto",
-    },
-    {
-      label: results?.totalIncomeTax,
-      description: "Imposto de renda",
-    },
-    {
-      label: results?.totalNetIncome,
-      description: "Rendimento líquido",
-    },
-  ];
-
-  const informations = {
-    time: infor?.time,
-    interestRate: infor?.interestRate,
-  };
-
+export const SimulationResultView = ({
+  informations,
+  resultsByMounth,
+  simulationResult,
+}: SimulationResultViewProps) => {
   return (
     <WithHeaderLayout>
       <h1 className="text-m3-secondary text-[49px] leading-[58.8px] my-[116px] text-center">
-        Seu dinheiro investido em {informations.time} meses, a uma taxa de juros
-        de {informations.interestRate}%, teve o incrível rendimento abaixo:
+        Seu dinheiro investido em {informations?.time} meses, a uma taxa de
+        juros de {informations?.interestRate}%, teve o incrível rendimento
+        abaixo:
       </h1>
       <div className="flex w-full gap-[30px]">
         <section className="flex flex-col gap-[116px] items-start justify-between w-full relative z-10">

@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router";
-import { SimulationResultView } from "./features/simulation-result/view/simulation-result-view";
-import { SimulationView } from "./features/simulation/view/simulation-view";
+import { SimulationViewModel } from "./features/simulation/view/simulation-view-model";
+import { SimulationResultViewModel } from "./features/simulation-result/view/simulation-result-view-model";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const PATHS = {
@@ -10,8 +10,8 @@ export const PATHS = {
 export const Routers = () => {
   return (
     <Routes>
-      <Route path="/" element={<SimulationView />} />
-      <Route path={PATHS.RESULT} element={<SimulationResultView />} />
+      <Route path="/" element={<SimulationViewModel />} />
+      <Route path={PATHS.RESULT} element={<SimulationResultViewModel />} />
     </Routes>
   );
 };
