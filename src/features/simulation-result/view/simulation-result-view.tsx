@@ -3,18 +3,25 @@ import { Button } from "../../../shared/components/_core/button";
 import { RenderList } from "../../../shared/components/render-utils/render-list";
 import { WithHeaderLayout } from "../../../shared/layouts/with-header-layout";
 
+import { DetailedResult, Informations } from "../../../shared/types";
 import { ResultBlock } from "../component/result-block";
 import { TableResult } from "../component/table-result";
 import { SimulationResultProps } from "../types";
-import { DetailedResult, Informations } from "../../../shared/types";
+
+import React from "react";
+import { UseReactToPrintFn } from "react-to-print";
 
 type SimulationResultViewProps = {
+  downloadPDF: UseReactToPrintFn;
+  contentRef: React.RefObject<HTMLDivElement | null>;
   informations: Informations | null;
   resultsByMounth: DetailedResult[] | null;
   simulationResult: SimulationResultProps[];
 };
 
 export const SimulationResultView = ({
+  contentRef,
+  downloadPDF,
   informations,
   resultsByMounth,
   simulationResult,
@@ -53,11 +60,17 @@ export const SimulationResultView = ({
         <div className="bg-m3-gray-200 h-[400px] w-px z-10 relative" />
         {/* ----- */}
         <section className="flex flex-col gap-[116px] items-end justify-between w-full relative z-10">
-          <div className="w-full  h-[350px] overflow-auto">
+          <div
+            className="w-full h-[350px] overflow-auto"
+            id="table"
+            ref={contentRef}
+          >
             <TableResult detailedResult={resultsByMounth || []} />
           </div>
 
-          <Button className="self-end">Gerar relátorio PDF</Button>
+          <Button onClick={() => downloadPDF()} className="self-end">
+            Gerar relátorio PDF
+          </Button>
         </section>
       </div>
     </WithHeaderLayout>
