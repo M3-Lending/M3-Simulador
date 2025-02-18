@@ -22,11 +22,13 @@ export const SimulationResultView = ({
   return (
     <WithHeaderLayout>
       <h1 className="text-m3-secondary text-[49px] leading-[58.8px] my-[116px] text-center">
-        Seu dinheiro investido em {informations?.time} meses, a uma taxa de
-        juros de {informations?.interestRate}%, teve o incrível rendimento
-        abaixo:
+        Seu dinheiro investido em{" "}
+        <span className="font-medium">{informations?.time}</span> meses, a uma
+        taxa de juros de{" "}
+        <span className="font-medium">{informations?.interestRate}%</span>, teve
+        o incrível rendimento abaixo:
       </h1>
-      <div className="flex w-full gap-[30px]">
+      <div className="flex w-full gap-[30px] h-full">
         <section className="flex flex-col gap-[116px] items-start justify-between w-full relative z-10">
           <div className="grid grid-cols-2 grid-rows-2 gap-[30px]">
             <RenderList
@@ -48,7 +50,7 @@ export const SimulationResultView = ({
           </Button>
         </section>
         {/* ----- */}
-        <div className="bg-m3-gray-200 h-full w-px" />
+        <div className="bg-m3-gray-200 h-[400px] w-px z-10 relative" />
         {/* ----- */}
         <section className="flex flex-col gap-[116px] items-end justify-between w-full relative z-10">
           <div className="w-full  h-[350px] overflow-auto">

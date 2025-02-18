@@ -46,6 +46,14 @@ export type SimulationViewProps = {
     event: React.ChangeEvent<HTMLInputElement>,
     field: keyof SimulationScheemaType
   ) => void;
+  handlePorcentagemInput: (
+    event: React.ChangeEvent<HTMLInputElement>,
+    field: keyof SimulationScheemaType
+  ) => void;
+  handleInputWithPriceChange: (
+    event: React.ChangeEvent<HTMLInputElement>,
+    field: keyof SimulationScheemaType
+  ) => void;
   simulateInvestment: SubmitHandler<{
     valueToInvest: string;
     timeToInvest: string;

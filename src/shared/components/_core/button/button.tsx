@@ -34,7 +34,7 @@ export const Button = ({
     <Comp
       {...props}
       className={cn(
-        "w-full py-[14px] px-4 rounded-[8px] cursor-pointer hover:scale-[1.03] duration-300 transition-transform active:scale-110",
+        "w-full py-[14px] px-4 text-xl font-medium rounded-[8px] cursor-pointer hover:scale-[1.03] duration-300 transition-transform active:scale-110",
         sizes[size],
         variants[variant],
         props.className

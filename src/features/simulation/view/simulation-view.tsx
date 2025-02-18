@@ -22,6 +22,8 @@ export const SimulationView = ({
   displayErroVariant,
   handleInputChange,
   simulateInvestment,
+  handlePorcentagemInput,
+  handleInputWithPriceChange,
 }: SimulationViewProps) => {
   return (
     <WithHeaderLayout>
@@ -38,7 +40,7 @@ export const SimulationView = ({
             {...form.register("valueToInvest")}
             label="Quanto pretende investir?"
             errorMessage={form.errors.valueToInvest?.message}
-            onChange={(e) => handleInputChange(e, "valueToInvest")}
+            onChange={(e) => handleInputWithPriceChange(e, "valueToInvest")}
             variant={displayErroVariant(!!form.errors.valueToInvest?.message)}
           />
           <Input
@@ -46,7 +48,7 @@ export const SimulationView = ({
             {...form.register("interestRate")}
             label="Qual a taxa de juros? (em meses)"
             errorMessage={form.errors.interestRate?.message}
-            onChange={(e) => handleInputChange(e, "interestRate")}
+            onChange={(e) => handlePorcentagemInput(e, "interestRate")}
             variant={displayErroVariant(!!form?.errors.interestRate?.message)}
           />
           <Input

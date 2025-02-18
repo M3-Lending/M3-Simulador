@@ -1,15 +1,13 @@
 import React from "react";
-import {
-  DetailedResult,
-  SimulationTotalValues,
-  storage,
-} from "../../../shared/utils/storage";
+import { storage } from "../../../shared/utils/storage";
 import { SimulationScheema, SimulationScheemaType } from "./simulation-scheema";
 import { PATHS } from "../../../routers";
-import { calcIncomeTaxValue } from "../utils";
+import { calcIncomeTaxValue, PersonaltDelete } from "../utils";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { getFormatterForCurrency } from "../../../shared/utils/formatters";
+import { DetailedResult, SimulationTotalValues } from "../../../shared/types";
 
 export const useSimulationModel = () => {
   const {
@@ -20,9 +18,16 @@ export const useSimulationModel = () => {
     formState: { errors },
   } = useForm<SimulationScheemaType>({
     resolver: zodResolver(SimulationScheema),
+    defaultValues: {
+      interestRate: "",
+      timeToInvest: "",
+      typeOfInvest: "",
+      valueToInvest: "",
+    },
   });
 
   const navigate = useNavigate();
+  const format = getFormatterForCurrency();
 
   const simulateInvestment: SubmitHandler<SimulationScheemaType> = async (
     data
@@ -91,6 +96,24 @@ export const useSimulationModel = () => {
     return "default";
   };
 
+  const handleInputWithPriceChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    field: keyof SimulationScheemaType
+  ) => {
+    const firstTreatment = event.target.value.replace("R$", "").trim();
+
+    const cleanedValue = firstTreatment.replace(/\D/g, "");
+
+    if (cleanedValue) {
+      const numberValue = parseFloat(cleanedValue) / 100;
+      const formattedValue = format.format(numberValue);
+
+      setValue(field, formattedValue, { shouldValidate: true });
+    } else {
+      setValue(field, "", { shouldValidate: true });
+    }
+  };
+
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     field: keyof SimulationScheemaType
@@ -99,6 +122,33 @@ export const useSimulationModel = () => {
 
     setValue(field, cleanedValue, { shouldValidate: true });
   };
+
+  const handlePorcentagemInput = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    field: keyof SimulationScheemaType
+  ) => {
+    let inputValue = e.target.value.replace("%", "");
+
+    if ((e.nativeEvent as InputEvent).data === null) {
+      return setValue(
+        field,
+        PersonaltDelete({
+          e,
+          inputValue,
+        }) as string
+      );
+    }
+
+    inputValue = inputValue.replace(/[^0-9.]/g, "");
+
+    if (inputValue.includes(".")) {
+      const [integer, decimal] = inputValue.split(".");
+      inputValue = integer + "." + decimal.slice(0, 2);
+    }
+
+    setValue(field, inputValue + "%", { shouldValidate: true });
+  };
+
   return {
     form: {
       errors,
@@ -106,9 +156,10 @@ export const useSimulationModel = () => {
       register,
       handleSubmit,
     },
-
     handleInputChange,
     simulateInvestment,
     displayErroVariant,
+    handlePorcentagemInput,
+    handleInputWithPriceChange,
   };
 };

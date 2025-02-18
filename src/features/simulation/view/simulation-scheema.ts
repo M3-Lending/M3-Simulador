@@ -3,7 +3,17 @@ import { z } from "zod";
 export const SimulationScheema = z.object({
   valueToInvest: z
     .string()
-    .transform((val) => val.replace(/[^\d.]/g, ""))
+    .transform((val) => {
+      const cleanedValue = val.replace(/[^\d.,]/g, "");
+      const hasPoint = cleanedValue.includes(".");
+
+      if (!hasPoint) {
+        //this handle with values less than 1000, values like 999,00 or 377,77
+        return cleanedValue.replace(",", ".");
+      }
+
+      return cleanedValue.replace(".", "").replace(",", ".");
+    })
     .refine((val) => val !== "" && Number(val) >= 250, {
       message: "O valor mínimo para investimento é R$ 250,00.",
     }),
