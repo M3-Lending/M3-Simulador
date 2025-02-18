@@ -4,30 +4,37 @@ import { RenderList } from "../../../shared/components/render-utils/render-list"
 import { WithHeaderLayout } from "../../../shared/layouts/with-header-layout";
 import { ResultBlock } from "../component/result-block";
 import { TableResult } from "../component/table-result";
+import { storage } from "../../../shared/utils/storage";
 
 export const SimulationResultView = () => {
+  const infor = storage.get("informations");
+
+  const results = storage.get("simulationResult");
+
+  const resultsByMounth = storage.get("detailedResults");
+
   const simulationResult = [
     {
-      label: "10.000,00",
+      label: results?.amountInvested,
       description: "Valor invesito",
     },
     {
-      label: "5.750,00",
+      label: results?.totalGrossIncome,
       description: "Rendimento bruto",
     },
     {
-      label: "1.118,75",
+      label: results?.totalIncomeTax,
       description: "Imposto de renda",
     },
     {
-      label: "4.873,50",
+      label: results?.totalNetIncome,
       description: "Rendimento líquido",
     },
   ];
 
   const informations = {
-    time: "12",
-    interestRate: "2.3",
+    time: infor?.time,
+    interestRate: infor?.interestRate,
   };
 
   return (
@@ -43,7 +50,7 @@ export const SimulationResultView = () => {
               items={simulationResult}
               renderItem={(opt) => (
                 <ResultBlock
-                  label={opt.label}
+                  label={opt?.label || 0}
                   className="min-w-[290px]"
                   description={opt.description}
                 />
@@ -62,7 +69,7 @@ export const SimulationResultView = () => {
         {/* ----- */}
         <section className="flex flex-col gap-[116px] items-end justify-between w-full relative z-10">
           <div className="w-full  h-[350px] overflow-auto">
-            <TableResult />
+            <TableResult detailedResult={resultsByMounth || []} />
           </div>
 
           <Button className="self-end">Gerar relátorio PDF</Button>

@@ -2,7 +2,7 @@ import React from "react";
 import { cn } from "../../../../shared/utils/cn";
 
 type Props = {
-  label: string;
+  label: string | number;
   description: string;
 } & React.ComponentProps<"div">;
 

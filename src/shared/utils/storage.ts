@@ -1,12 +1,24 @@
+export type DetailedResult = {
+  time: string;
+  netIncome: string;
+  grossIncome: string;
+  incomeTax: string;
+};
+
+export type SimulationTotalValues = {
+  totalGrossIncome: number;
+  totalIncomeTax: number;
+  totalNetIncome: number;
+  amountInvested: number;
+};
+
 type TypeStorage = {
-  simulationResult: {
-    label: string;
-    description: string;
-  }[];
+  simulationResult: SimulationTotalValues;
   informations: {
     time: string;
     interestRate: string;
   };
+  detailedResults: DetailedResult[];
 };
 
 export const storage = {
