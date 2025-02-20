@@ -1,15 +1,19 @@
-import { Link } from "react-router";
-import { Button } from "../../../shared/components/_core/button";
-import { RenderList } from "../../../shared/components/render-utils/render-list";
-import { WithHeaderLayout } from "../../../shared/layouts/with-header-layout";
-
-import { DetailedResult, Informations } from "../../../shared/types";
-import { ResultBlock } from "../component/result-block";
-import { TableResult } from "../component/table-result";
-import { SimulationResultProps } from "../types";
 
 import React from "react";
+
+import { Link } from "react-router";
+import { SimulationResultProps } from "../types";
+import { Button } from "../../../shared/components/_core/button";
+import { DetailedResult, Informations } from "../../../shared/types";
+import { WithHeaderLayout } from "../../../shared/layouts/with-header-layout";
+import { RenderList } from "../../../shared/components/render-utils/render-list";
+
+import { ResultBlock } from "../component/result-block";
+import { TableResult } from "../../../shared/components/table-result/table-result";
+
 import { UseReactToPrintFn } from "react-to-print";
+
+const PdfView = React.lazy(() => import('../../pdf/view/pdf-view').then(module => ({ default: module.PdfView })))
 
 type SimulationResultViewProps = {
   downloadPDF: UseReactToPrintFn;
@@ -72,6 +76,8 @@ export const SimulationResultView = ({
             Gerar relátorio PDF
           </Button>
         </section>
+
+        <PdfView ref={contentRef} className="hidden pdf-view" />
       </div>
     </WithHeaderLayout>
   );

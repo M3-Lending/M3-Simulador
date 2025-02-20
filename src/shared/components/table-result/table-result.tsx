@@ -1,7 +1,9 @@
-import * as T from "../../../../shared/components/_core/table";
-import { RenderList } from "../../../../shared/components/render-utils/render-list";
-import { DetailedResult } from "../../../../shared/types";
-import { getFormatterForCurrency } from "../../../../shared/utils/formatters";
+import * as T from '../_core/table'
+
+import { DetailedResult } from "../../types";
+import { getFormatterForCurrency } from "../../utils/formatters";
+import { RenderList } from "../render-utils/render-list";
+
 
 const tableHeaders = [
   "Prazo",
@@ -24,7 +26,7 @@ export const TableResult = ({
           <RenderList
             items={tableHeaders}
             renderItem={(item) => (
-              <T.TableHead className="border-m3-gray-50 border font-bold">
+              <T.TableHead className="border-m3-gray-50 border font-bold text-center">
                 {item}
               </T.TableHead>
             )}

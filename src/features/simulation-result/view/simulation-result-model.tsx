@@ -37,7 +37,7 @@ export const useSimulationResultModel = () => {
     pageStyle: `
         @page {
           size: auto;  
-          margin: 20mm;
+          margin: 0;
         }
         body {
           -webkit-print-color-adjust: exact;
@@ -46,6 +46,9 @@ export const useSimulationResultModel = () => {
         * {
           overflow: visible !important;
         }
+        .pdf-view {
+          display: block;
+}
       `,
   });
 
