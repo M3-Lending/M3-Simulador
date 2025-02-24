@@ -6,11 +6,11 @@ import { SubmitHandler, useForm } from "react-hook-form";
 
 
 import { PATHS } from "../../../routers";
-import { PersonaltDelete } from "../utils";
+import { getFormatterForCurrency } from "../../../shared/utils/formatters";
 import { storage } from "../../../shared/utils/storage";
+import { PersonaltDelete } from "../utils";
 import { calculatePriceInvestment } from "../utils/price";
 import { calculateSimpleInvestment } from "../utils/simple";
-import { getFormatterForCurrency } from "../../../shared/utils/formatters";
 import { SimulationScheema, SimulationScheemaType } from "./simulation-scheema";
 
 export const useSimulationModel = () => {
@@ -43,22 +43,39 @@ export const useSimulationModel = () => {
 
     if (data.typeOfInvest === 'price') {
 
-      const result = calculatePriceInvestment({
+      const { result, simulationResult } = calculatePriceInvestment({
         time,
         value,
         interestRate,
       })
 
+
+      storage.set("informations", JSON.stringify({
+        time, interestRate
+      }))
+
       storage.set('detailedResultsPrice', JSON.stringify(result))
+      storage.set("simulationResult", JSON.stringify(simulationResult));
 
     }
 
     if (data.typeOfInvest === 'simple') {
-      const resultOfAllTime = calculateSimpleInvestment({
+      const { result, simulationResult } = calculateSimpleInvestment({
         interestRate, time, value
       })
 
-      storage.set("detailedResults", JSON.stringify(resultOfAllTime));
+
+      storage.set("simulationResult", JSON.stringify(simulationResult));
+      storage.set(
+        "informations",
+        JSON.stringify({
+          time,
+          interestRate,
+        })
+
+      );
+
+      storage.set("detailedResults", JSON.stringify(result));
 
     }
 

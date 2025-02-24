@@ -1,6 +1,5 @@
 import { calcIncomeTaxValue } from "."
 import { DetailedResult, SimulationTotalValues } from "../../../shared/types"
-import { storage } from "../../../shared/utils/storage"
 
 type InvestSimpleProps = {
   value: number
@@ -54,17 +53,11 @@ export const calculateSimpleInvestment = ({ interestRate, time, value }: InvestS
     amountInvested: value,
   };
 
-  storage.set("simulationResult", JSON.stringify(simulationResult));
-  storage.set(
-    "informations",
-    JSON.stringify({
-      time,
-      interestRate,
-    })
 
-  );
-
-  return resultOfAllTime
+  return {
+    simulationResult,
+    result: resultOfAllTime
+  }
 
 
 }

@@ -1,6 +1,5 @@
 import { calcIncomeTaxValue } from "."
 import { SimulationTotalValues } from "../../../shared/types"
-import { storage } from "../../../shared/utils/storage"
 
 type InvestPriceProps = {
   value: number
@@ -58,14 +57,10 @@ export const calculatePriceInvestment = ({ interestRate, time, value }: InvestPr
     totalIncomeTax: parseFloat(totalIncomeTax.toFixed(2)),
   };
 
-  storage.set("simulationResult", JSON.stringify(simulationResult));
-
-
-  storage.set("informations", JSON.stringify({
-    time, interestRate
-  }))
-
-  return result
+  return {
+    result,
+    simulationResult
+  }
 }
 
 
