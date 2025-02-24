@@ -20,7 +20,7 @@ export const Button = ({
 }: Props) => {
   const variants: Record<VariantButtonOptions, string> = {
     primary: "bg-m3-primary",
-    outline: "bg-transparent border border-m3-primary",
+    outline: "bg-transparent border border-m3-secondary text-m3-secondary",
   };
 
   const sizes: Record<SizesButtonOptions, string> = {

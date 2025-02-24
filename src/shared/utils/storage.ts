@@ -1,9 +1,11 @@
-import { DetailedResult, Informations, SimulationTotalValues } from "../types";
+import { DetailedResult, DetailedResultPrice, Informations, SimulationTotalValues, InvestimentType } from "../types";
 
 type TypeStorage = {
   informations: Informations;
+  investType: InvestimentType
   detailedResults: DetailedResult[];
   simulationResult: SimulationTotalValues;
+  detailedResultsPrice: DetailedResultPrice[];
 };
 
 export const storage = {

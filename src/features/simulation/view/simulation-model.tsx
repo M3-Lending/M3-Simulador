@@ -1,13 +1,17 @@
 import React from "react";
-import { storage } from "../../../shared/utils/storage";
-import { SimulationScheema, SimulationScheemaType } from "./simulation-scheema";
-import { PATHS } from "../../../routers";
-import { calcIncomeTaxValue, PersonaltDelete } from "../utils";
-import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
+
 import { zodResolver } from "@hookform/resolvers/zod";
+import { SubmitHandler, useForm } from "react-hook-form";
+
+
+import { PATHS } from "../../../routers";
+import { PersonaltDelete } from "../utils";
+import { storage } from "../../../shared/utils/storage";
+import { calculatePriceInvestment } from "../utils/price";
+import { calculateSimpleInvestment } from "../utils/simple";
 import { getFormatterForCurrency } from "../../../shared/utils/formatters";
-import { DetailedResult, SimulationTotalValues } from "../../../shared/types";
+import { SimulationScheema, SimulationScheemaType } from "./simulation-scheema";
 
 export const useSimulationModel = () => {
   const {
@@ -32,58 +36,33 @@ export const useSimulationModel = () => {
   const simulateInvestment: SubmitHandler<SimulationScheemaType> = async (
     data
   ) => {
-    const grossIncome =
-      parseFloat(data.valueToInvest) * (parseFloat(data.interestRate) / 100);
 
-    const time = Number(data.timeToInvest);
+    const time = parseFloat(data.timeToInvest);
+    const value = parseFloat(data.valueToInvest);
+    const interestRate = parseFloat(data.interestRate);
 
-    const resultOfAllTime = [];
+    if (data.typeOfInvest === 'price') {
 
-    for (let i = 0; i < time; i++) {
-      const incomeTax = grossIncome * (calcIncomeTaxValue(i + 1) / 100);
+      const result = calculatePriceInvestment({
+        time,
+        value,
+        interestRate,
+      })
 
-      const resultByMonth: DetailedResult = {
-        time: String(i + 1),
-        netIncome: String(grossIncome - incomeTax),
-        grossIncome: grossIncome.toFixed(2),
-        incomeTax: incomeTax.toFixed(2),
-      };
+      storage.set('detailedResultsPrice', JSON.stringify(result))
 
-      resultOfAllTime.push(resultByMonth);
     }
 
-    storage.set("detailedResults", JSON.stringify(resultOfAllTime));
-
-    const totalGrossIncome = resultOfAllTime.reduce(
-      (accumulator, actual) => accumulator + parseFloat(actual.grossIncome),
-      0
-    );
-
-    const totalIncomeTax = resultOfAllTime.reduce(
-      (accumulator, actual) => accumulator + parseFloat(actual.incomeTax),
-      0
-    );
-
-    const totalNetIncome = resultOfAllTime.reduce(
-      (accumulator, actual) => accumulator + parseFloat(actual.netIncome),
-      0
-    );
-
-    const simulationResult: SimulationTotalValues = {
-      totalNetIncome,
-      totalIncomeTax,
-      totalGrossIncome,
-      amountInvested: parseFloat(data.valueToInvest),
-    };
-
-    storage.set("simulationResult", JSON.stringify(simulationResult));
-    storage.set(
-      "informations",
-      JSON.stringify({
-        time: data.timeToInvest,
-        interestRate: data.interestRate,
+    if (data.typeOfInvest === 'simple') {
+      const resultOfAllTime = calculateSimpleInvestment({
+        interestRate, time, value
       })
-    );
+
+      storage.set("detailedResults", JSON.stringify(resultOfAllTime));
+
+    }
+
+    storage.set('investType', data.typeOfInvest)
 
     navigate(PATHS.RESULT);
   };

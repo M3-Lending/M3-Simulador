@@ -8,9 +8,10 @@ export const useSimulationResultModel = () => {
   const contentRef = React.useRef<HTMLDivElement>(null);
 
   const results = storage.get("simulationResult");
+  const investmentType = storage.get("investType");
   const informations = storage.get("informations");
   const resultsByMounth = storage.get("detailedResults");
-
+  const resultsByMounthPrice = storage.get('detailedResultsPrice')
   const format = getFormatterForCurrency();
 
   const simulationResult: SimulationResultProps[] = [
@@ -53,10 +54,12 @@ export const useSimulationResultModel = () => {
   });
 
   return {
-    downloadPDF,
     contentRef,
+    downloadPDF,
     informations,
+    investmentType,
     resultsByMounth,
     simulationResult,
+    resultsByMounthPrice,
   };
 };

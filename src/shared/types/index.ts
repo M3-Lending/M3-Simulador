@@ -16,3 +16,16 @@ export type Informations = {
   time: string;
   interestRate: string;
 };
+
+export type DetailedResultPrice = {
+  time: number
+  incomeTax: number
+  netIncome: number
+  amortization: number
+  interestToPay: number
+  installmentValue: number
+  valueBeforeAmortization: number
+  valueAfterAmortization: number
+}
+
+export type InvestimentType = 'simple' | 'price'
