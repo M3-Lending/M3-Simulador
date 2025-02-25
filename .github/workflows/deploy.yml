@@ -16,8 +16,8 @@ jobs:
         run: npm run build
       - name: Configure Git Identity
         run: |
-        git config --global user.email "jonathan.ferreira@m3lending.com.br"
-        git config --global user.name "jonathan-m3lending"
+          git config --global user.email "jonathan.ferreira@m3lending.com.br"
+          git config --global user.name "jonathan-m3lending"
       - name: Deploy to GitHub Pages
         run: npm run deploy
 
